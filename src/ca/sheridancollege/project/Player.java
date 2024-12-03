@@ -5,8 +5,6 @@
  */
 package ca.sheridancollege.project;
 
-import java.util.ArrayList;
-
 /**
  * A class that models each Player in the game. Players have an identifier, which should be unique.
  *
@@ -49,69 +47,3 @@ public abstract class Player {
     public abstract void play();
 
 }
-
- class UnoPlayer extends Player {
-    private ArrayList<UnoCard> hand;
-
-    public UnoPlayer(String name) {
-        super(name);
-        this.hand = new ArrayList<>();
-    }
-    
-
-    @Override
-    public void play() {
-      //Show the player's hand
-        System.out.println(getName() + "'s turn. Your hand: " + hand);
-
-        // Get the top card of the discard pile 
-        UnoCard topCard = getTopCardOfDiscardPile();
-
-        //Check if the player can play a card
-        UnoCard cardToPlay = null;
-        for (UnoCard card : hand) {
-            if (canPlayCard(card, topCard)) {
-                cardToPlay = card;
-                break;
-            }
-        }
-
-        if (cardToPlay != null) {
-            //plays card
-            playCard(cardToPlay);
-            System.out.println(getName() + " played: " + cardToPlay);
-        } else {
-            //Draw a card if no player can play a card
-            UnoCard drawnCard = drawCardFromDeck();
-            hand.add(drawnCard);
-            System.out.println(getName() + " drew a card: " + drawnCard);
-        }
-    }
-    private UnoCard getTopCardOfDiscardPile() {
-        // gets a fake card CHANGE THIS LATER
-        return new UnoCard("Red", "5");
-    }
-    private boolean canPlayCard(UnoCard card, UnoCard topCard) {
-        // Check if the card can be played on the top card of the discard pile
-        return card.getColor().equals(topCard.getColor()) || card.getValue().equals(topCard.getValue()) || card.getColor().equals("Wild");
-    }
-    private UnoCard drawCardFromDeck() {
-        //gets a fake card CHANGE THIS LATER
-        return new UnoCard("Blue", "2");
-    }
-
-    public void drawCard(UnoCard card) {
-        hand.add(card);
-    }
-
-    public void playCard(UnoCard card) {
-        hand.remove(card);
-    }
-    public ArrayList<UnoCard> getHand() {
-    return hand;
-}
-
-
-}
-
-

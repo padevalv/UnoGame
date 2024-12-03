@@ -1,28 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca.sheridancollege.project;
 
-/**
- *
- * @author diask
- */
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
-public class UnoPlayer extends Player {
+/**
+ * A class representing a player in the Uno game.
+ */
+class UnoPlayer extends Player {
+
     private ArrayList<UnoCard> hand;
 
     public UnoPlayer(String name) {
         super(name);
         this.hand = new ArrayList<>();
     }
-    
 
-    @Override
-    public void play() {
-        // Implement the logic for a player to play their turn in UNO
-        // Delegate tasks to other classes/methods
+    public ArrayList<UnoCard> getHand() {
+        return hand;
     }
 
     public void drawCard(UnoCard card) {
@@ -33,6 +28,9 @@ public class UnoPlayer extends Player {
         hand.remove(card);
     }
 
-    // Additional methods to manage the player's hand
+    @Override
+    public void play() {
+        // Logic for the player to play a card (to be implemented)
+        System.out.println(getName() + " is playing their turn.");
+    }
 }
-

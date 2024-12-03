@@ -1,3 +1,8 @@
+/**
+ * SYST 17796 Project Base code.
+ * Students can modify and extend to implement their game.
+ * Add your name as an author and the date!
+ */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
@@ -51,50 +56,3 @@ public abstract class Game {
     public abstract void declareWinner();
 
 }//end class
-
-/**
- * A class representing an UNO game.
- */
-class UnoGame extends Game {
-    private UnoGroupOfCards deck;
-    private ArrayList<UnoPlayer> players;
-
-    public UnoGame(String name, UnoGroupOfCards deck, ArrayList<UnoPlayer> players) {
-        super(name);
-        this.deck = deck;
-        this.players = players;
-    }
-    @Override
-    public void declareWinner() {
-        for (UnoPlayer player : players) {
-            if (player.getHand().isEmpty()) {
-                System.out.println("The winner is: " + player.getName());
-                break;
-            }
-        }
-    }
-
-    @Override
-    public void play() {
-        deck.shuffle();
-        // Deal 7 cards to each player
-        for (UnoPlayer player : players) {
-            for (int i = 0; i < 7; i++) {
-                player.drawCard(deck.drawCardFromDeck());
-            }
-        }
-        // Main game loop
-        boolean gameWon = false;
-        while (!gameWon) {
-            for (UnoPlayer player : players) {
-                player.play();
-                if (player.getHand().isEmpty()) {
-                    gameWon = true;
-                    declareWinner();
-                    break;
-                }
-            }
-        }
-    }   
-
-}
